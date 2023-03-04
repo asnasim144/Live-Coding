@@ -14,9 +14,12 @@ export default function Nav({ setCodeAndPreview, html, css, js }) {
       </div>
     </div>
   )
+  // create code and preview component
   function createComponent(){
     setCodeAndPreview(true)
   }
+
+  // copy whole code as json
   function copyCode(){
     const code = {
       html: html,
@@ -27,6 +30,8 @@ export default function Nav({ setCodeAndPreview, html, css, js }) {
     console.log("🚀 ~ file: Nav.js:27 ~ copyCode ~ json:", json)
     Cookies.set('code', json, { expires: 1 });
   }
+
+  // save code to the database (dummy link)
   function save(){
     axios.post('http://localhost:9000/codes', {
       html: html,

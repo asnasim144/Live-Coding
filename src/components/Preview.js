@@ -4,6 +4,7 @@ export default function Preview({ html, css, js}) {
   const [previewContent, setPreviewContent] = useState('') 
   const previewRef = useRef()
   useEffect(() => { 
+    // combinig the code as a whole html file
     setPreviewContent(`<html><head><style>  ${ css }  </style></head><body>  ${ html }  <script>  ${ js }  </script></body></html>`)
   }, [css, html, js]);  
 
