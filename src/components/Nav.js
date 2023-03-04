@@ -26,9 +26,14 @@ export default function Nav({ setCodeAndPreview, html, css, js }) {
       css: css,
       js: js,
     };
-    const json = JSON.stringify(code);
-    console.log("🚀 ~ file: Nav.js:27 ~ copyCode ~ json:", json)
-    Cookies.set('code', json, { expires: 1 });
+    const json = JSON.stringify(code)
+    navigator.clipboard.writeText(json)
+    .then(() => {
+      alert('Code copied to clipboard!')
+    })
+    .catch((error) => {
+      console.error('Error copying code:', error);
+    })
   }
 
   // save code to the database (dummy link)
