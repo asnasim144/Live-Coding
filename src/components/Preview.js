@@ -11,13 +11,13 @@ export default function Preview({ html, css, js}) {
 
   return (
     <div className='preview'>
-      <div>
+      {/* <div>
         <button  onClick={preview}>Preview</button>
-      </div>
-      <iframe title="preview" ref={previewRef} ></iframe>  
+      </div> */}
+      <iframe title="preview" ref={previewRef} srcDoc={previewContent} ></iframe>  
     </div>
   ) 
-  function preview () {
-    previewRef.current.setAttribute("srcdoc", previewContent)
-  }
+  // function preview () {
+  //   previewRef.current.setAttribute("srcdoc", previewContent)
+  // }
 }
