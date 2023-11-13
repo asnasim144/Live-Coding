@@ -4,10 +4,10 @@ import "./assets/style.css"
 
 function App() {
   return (
-    <div> 
+    <> 
       {/* <CreateContext /> */}
       <Index />
-    </div>
+    </>
   );
 }
 
