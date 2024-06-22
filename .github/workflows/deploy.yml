@@ -1,0 +1,27 @@
+name: Deploy to Netlify
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Use Node.js 20
+      uses: actions/setup-node@v3
+      with:
+        node-version: 20
+    
+    # - name: Install dependencies
+    #   run: CI=false npm run build  # Or yarn install if you use yarn
+
+    - name: Build the project
+      run: CI=false npm run build 
+        
+    - name: Deploy to Netlify
+      run: curl -X POST -d {} ${{ secrets.NETLIFY_BUILD_HOOCK }}
+
