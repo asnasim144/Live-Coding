@@ -15,9 +15,9 @@ export default function Nav({ setCodeAndPreview, html, css, js, meta }) {
     </div>
   )
   // create code and preview component
-  function createComponent(){
-    setCodeAndPreview(true)
-  }
+  // function createComponent(){
+  //   setCodeAndPreview(true)
+  // }
 
   // copy whole code as json
   function copyCode(){
@@ -37,9 +37,8 @@ export default function Nav({ setCodeAndPreview, html, css, js, meta }) {
       ${js}
     </script>
     </html>
-    `;
-    const json = JSON.stringify(code)
-    navigator.clipboard.writeText(json)
+    `; 
+    navigator.clipboard.writeText(code)
     .then(() => {
       alert('Code copied to clipboard!')
     })
