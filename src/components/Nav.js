@@ -4,17 +4,17 @@ import React from 'react'
 
 export default function Nav({ setCodeAndPreview, html, css, js, meta }) {
   return (
-    <div className='header flex justify-between p-2 m-2'>
+    <div className='flex justify-between p-2 m-2 header'>
       <div>
         {/* <button onClick={createComponent} >Create Component</button> */}
       </div>
       <div>
-        <button onClick={copyCode}  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Copy Code</button>
+        <button onClick={copyCode}  className="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">Copy Code</button>
         {/* <button onClick={save} >Save Code</button> */}
       </div>
     </div>
   )
-  // create code and preview component
+  // create code and preview component 
   // function createComponent(){
   //   setCodeAndPreview(true)
   // }
