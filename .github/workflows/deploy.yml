@@ -31,9 +31,9 @@ jobs:
 
             # Rebuild and restart the Docker containers
             docker-compose down
-            docker-compose build
-            docker-compose up -d
-
+            # docker-compose 
+            docker-compose up -d  --build
+            
             # Conditionally reload Nginx if necessary (e.g., if Nginx config has changed)
             if [ -f /path/to/your/nginx/config ]; then
               systemctl reload nginx

@@ -1,6 +1,7 @@
 # Use a multi-stage build to keep the final image small
 # Stage 1: Build
 FROM node:alpine
+# FROM node:alpine AS builder
 
 WORKDIR /usr/src/app
 
@@ -12,7 +13,7 @@ RUN npm install
 
 # Copy all files and build the project
 COPY . .
-# RUN npm run build
+RUN npm run build
 
 # # Stage 2: Production image
 # FROM node:alpine
