@@ -1,27 +1,40 @@
-name: Deploy to Netlify
+name: Deploy to DigitalOcean
 
 on:
   push:
-    branches: [ master ]
+    branches:
+      - master
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Use Node.js 20
-      uses: actions/setup-node@v3
-      with:
-        node-version: 20
-    
-    - name: Install dependencies
-      run: npm install  
+      - name: SSH into DigitalOcean Droplet
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DROPLET_IP }}
+          username: root
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            # Navigate to the application directory
+            cd /var/www/multi-app-setup/Live-Coding
 
-    - name: Build the project
-      run: CI=false npm run build 
-        
-    - name: Deploy to Netlify
-      run: curl -X POST -d {} ${{ secrets.NETLIFY_BUILD_HOOCK }}
+            # Pull the latest code from GitHub
+            git pull origin master
 
+            # Optional: Run any database migrations
+            # docker-compose exec your_service_name php artisan migrate --force
+
+            # Rebuild and restart the Docker containers
+            docker-compose down
+            docker-compose build
+            docker-compose up -d
+
+            # Conditionally reload Nginx if necessary (e.g., if Nginx config has changed)
+            if [ -f /path/to/your/nginx/config ]; then
+              systemctl reload nginx
+            fi

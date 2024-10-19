@@ -1,4 +1,4 @@
-import Index from "./components/Index" 
+// import Index from "./components/Index" 
 // import CreateContext from "./components/CreateContext" 
 import "./assets/style.css"
 import NewIndex from "./components/NewIndex";

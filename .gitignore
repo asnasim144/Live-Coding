@@ -9,6 +9,11 @@
 /coverage
 
 # production
+node_modules
+build
+npm-debug.log
+.env
+
 /build
 
 # misc
