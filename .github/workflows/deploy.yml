@@ -22,19 +22,4 @@ jobs:
           script: |
             # Navigate to the application directory
             cd /var/www/multi-app-setup/Live-Coding
-
-            # Pull the latest code from GitHub
-            git pull origin master
-
-            # Optional: Run any database migrations
-            # docker-compose exec your_service_name php artisan migrate --force
-
-            # Rebuild and restart the Docker containers
-            docker-compose down
-            # docker-compose 
-            docker-compose up -d  --build
-            
-            # Conditionally reload Nginx if necessary (e.g., if Nginx config has changed)
-            if [ -f /path/to/your/nginx/config ]; then
-              systemctl reload nginx
-            fi
+            ./deploy.sh
