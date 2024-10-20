@@ -1,6 +1,6 @@
 # Use a multi-stage build to keep the final image small
 # Stage 1: Build
-FROM node:alpine
+FROM node:14
 # FROM node:alpine AS builder
 
 WORKDIR /usr/src/app
