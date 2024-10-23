@@ -8,9 +8,12 @@ services:
     container_name: frontend
     environment:
       - NODE_ENV=production
-    expose:
-      - 3333
+      - PORT=3000  # Ensure the app inside the container runs on port 3000
+    ports:
+      - "3333:3000"  # Map local port 3333 to container port 3000
     restart: always
+    volumes:
+      - .:/usr/src/app
 
   nginx:
     image: nginx:alpine
