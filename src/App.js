@@ -8,7 +8,7 @@ function App() {
     <> 
       {/* <CreateContext /> */}
       {/* <Index /> */}
-      <NewIndex />   
+      <NewIndex /> 
     </>
   );
 }
