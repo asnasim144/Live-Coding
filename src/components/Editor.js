@@ -4,7 +4,7 @@ export default function Editor({ language,codes, setCodes }) {
   
   return (
     <div className=""> 
-      <div className="">
+      <div className=""> 
         <div className=""><b>{language} Editor</b></div>
       </div>
       <div className="">
