@@ -1,34 +1,44 @@
-# Use a multi-stage build to keep the final image small
-# Stage 1: Build
-FROM node:alpine
-# FROM node:alpine AS builder
+# Stage 1: Base Node.js image
+FROM node:alpine AS base
 
+# Set the working directory inside the container
 WORKDIR /usr/src/app
 
-# Copy only package.json and package-lock.json to leverage caching
+# Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
 
-# Install dependencies
+# Install the application dependencies
 RUN npm install
 
-# Copy all files and build the project
+# Copy the rest of the application code to the container
 COPY . .
-RUN npm run build
 
-# # Stage 2: Production image
-# FROM node:alpine
+# Stage 2: Development stage
+FROM base AS development
 
-# WORKDIR /usr/src/app
-
-# # Copy only the built output and necessary files
-# COPY --from=builder /usr/src/app/build ./bu   ild
-# COPY --from=builder /usr/src/app/package*.json ./
-
-# # Install only production dependencies
-# RUN npm install --only=production
-
-# # Expose the port the app runs on
+# Expose port 3000
 EXPOSE 3000
 
-# # Command to run the application
+# Start the app in development mode
 CMD ["npm", "start"]
+
+# Stage 3: Build stage
+FROM base AS builder
+
+# Build the React application for production
+RUN npm run build
+
+# Stage 4: Production stage with Nginx
+FROM nginx:alpine AS production
+
+# Copy custom Nginx configuration
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Copy the built application from the builder stage
+COPY --from=builder /usr/src/app/build /usr/share/nginx/html
+
+# Expose port 80
+EXPOSE 80
+
+# Start Nginx
+CMD ["nginx", "-g", "daemon off;"]
